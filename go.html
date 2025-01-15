@@ -3,125 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中山醫大教師會健康促進聯誼活動</title>
+    <title>中山醫大教師會嘉義太平老街一日遊</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f9f9f9;
             color: #333;
         }
         header {
-            background-color: #0073e6;
+            background-color: #4CAF50;
             color: white;
-            padding: 1rem 0;
+            padding: 20px 0;
             text-align: center;
+            font-size: 28px;
+            font-weight: bold;
         }
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        main {
+            padding: 20px;
         }
-        h1, h2, h3 {
-            color: #0073e6;
+        .section {
+            margin-bottom: 30px;
         }
-        .schedule {
-            margin: 1.5rem 0;
+        h2 {
+            color: #4CAF50;
+            border-left: 5px solid #4CAF50;
+            padding-left: 10px;
+            font-size: 24px;
         }
-        .schedule-item {
-            margin-bottom: 1rem;
+        p {
+            line-height: 1.8;
         }
-        .illustration {
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .images img {
+            width: calc(50% - 10px);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .timeline {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-left: 5px solid #4CAF50;
+            margin-bottom: 20px;
+        }
+        .footer {
+            background-color: #4CAF50;
+            color: white;
             text-align: center;
-            margin: 1rem 0;
+            padding: 10px;
+            font-size: 14px;
+            position: relative;
         }
-        .illustration img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            background-color: #f1f1f1;
-            margin-top: 2rem;
-        }
-        .highlight {
-            background-color: #fff3cd;
-            padding: 0.5rem;
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #4CAF50;
             border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background-color: #388e3c;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>中山醫大教師會健康促進聯誼活動</h1>
-        <h2>嘉義太平老街一日遊</h2>
-    </header>
-    <div class="container">
-        <section>
-            <h3>活動資訊</h3>
-            <p><strong>活動名稱：</strong>嘉義太平老街一日遊</p>
-            <p><strong>主旨：</strong>健康樂活</p>
-            <p><strong>活動日期：</strong>114年1月14日（星期二）</p>
-        </section>
 
-        <section class="illustration">
-            <img src="01.jpg" alt="活動map">
-        </section>
+<header>
+    教師會嘉義太平老街一日遊
+</header>
 
-        <section class="schedule">
-            <h3>行程安排</h3>
-            <div class="schedule-item">
-                <strong>9:00</strong> 離開中山醫後門，前往太平雲梯停車場（約90分鐘）
-            </div>
-            <div class="schedule-item">
-                <strong>10:30</strong> 太平雲梯遊客服務中心集合，現場購票或購買套票
-            </div>
-            <div class="schedule-item">
-                <strong>10:30-12:00</strong> 太平雲梯、雲之南步道
-            </div>
-            <div class="schedule-item">
-                <strong>12:00-13:30</strong> 太平老街自行用餐
-            </div>
-            <div class="schedule-item">
-                <strong>14:00-16:00</strong> 富摩咖啡莊園，咖啡DIY
-            </div>
-            <div class="schedule-item">
-                <strong>16:00</strong> 賦歸（可選擇參加碧湖山觀光茶園）
-            </div>
-        </section>
-
-        <section class="illustration">
-            <img src="02.jpg" alt="活動風景插圖">
-        </section>
-
-        <section>
-            <h3>費用與交通</h3>
-            <p class="highlight">教師會會員每人補助100元</p>
-            <ul>
-                <li>自行前往：250元/人</li>
-                <li>共乘搭車：500元/人</li>
-                <li>眷屬：350元/人；共乘600元/人</li>
-            </ul>
-            <p><strong>報名截止日：</strong>114年1月3日中午12點</p>
-        </section>
-
-        <section>
-            <h3>聯絡方式</h3>
-            <p>主辦單位：中山醫大教師會健康促進推動小組</p>		
-            <p>協辦人：楊乃成、胡超群、沈祐成、陳健懿</p>
-
-            <p>聯絡人：營養學系 楊乃成（0936810214）</p>
-			<p>備註：可攜眷；如有任何未盡事宜請多利用本會Line群組聯絡。</p>
-        </section>
+<main>
+    <!-- 活動簡介 -->
+    <div class="section">
+        <h2>活動簡介</h2>
+        <p>
+            114年1月14日(二)，教師會舉辦了以健康樂活為主題的「嘉義太平老街一日遊」。在這次活動中，教師們享受了自然景觀與文化體驗，留下了滿滿的回憶！
+        </p>
     </div>
-    <footer>
-        <p>&copy;中山醫大教師會第12屆理監事</p>
-    </footer>
+
+    <!-- 行程安排 -->
+    <div class="section">
+        <h2>行程安排</h2>
+        <div class="timeline">
+            <p><strong>9:00</strong> 中山醫後門出發，前往太平雲梯停車場</p>
+            <p><strong>10:30</strong> 太平雲梯遊客服務中心集合，購票後遊覽雲之南步道</p>
+            <p><strong>12:00</strong> 自行用餐於太平老街</p>
+            <p><strong>14:00</strong> 富摩咖啡莊園，咖啡DIY體驗</p>
+            <p><strong>16:00</strong> 活動結束，返回出發地</p>
+        </div>
+    </div>
+
+    <!-- 活動亮點照片 -->
+    <div class="section">
+        <h2>活動亮點</h2>
+        <div class="images">
+            <img src="01-0114.jpg" alt="太平雲梯合影">
+            <img src="02-0114.jpg" alt="富太平雲梯合影2">
+			 <img src="03-0114.jpg" alt="富摩咖啡莊園體驗">
+            <img src="04-0114.jpg" alt="太平老街合影">
+            <img src="05-0114.jpg" alt="雲之南步道合影">
+        </div>
+    </div>
+
+    <!-- 結語 -->
+    <div class="section">
+        <h2>結語</h2>
+        <p>
+            這次嘉義太平老街一日遊，不僅讓教師們紓解壓力，也增進了同事之間的情誼。期待未來能舉辦更多這樣的活動，讓大家有更多機會交流與放鬆！
+        </p>
+        <a href="#" class="btn">查看更多活動資訊</a>
+    </div>
+</main>
+
+<footer class="footer">
+    中山醫大教師會活動報導 © 2025
+</footer>
+
 </body>
 </html>
