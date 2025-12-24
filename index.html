@@ -3,130 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中山醫大教師會健康促進聯誼活動</title>
+    <title>中山醫大教師會出遊活動</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #0073e6;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
         .container {
-            max-width: 800px;
-            margin: 2rem auto;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .tab-btn {
+            padding: 1rem 2rem;
             background: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #667eea;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+        }
+        .content-area {
+            background: white;
+            border-radius: 15px;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
         }
-        h1, h2, h3 {
-            color: #0073e6;
+        .content-area.active {
+            display: block;
+            animation: fadeIn 0.5s;
         }
-        .schedule {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section {
+            margin-bottom: 2rem;
+        }
+        h2 {
+            color: #4CAF50;
+            border-left: 5px solid #4CAF50;
+            padding-left: 15px;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        h3 {
+            color: #667eea;
+            margin-bottom: 0.8rem;
+        }
+        p, li {
+            line-height: 1.8;
+            color: #333;
+        }
+        .timeline {
+            background: #f0f8ff;
+            padding: 1.5rem;
+            border-left: 5px solid #4CAF50;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        .timeline p {
+            margin: 0.5rem 0;
+        }
+        .info-box {
+            background: #fff9e6;
+            padding: 1.5rem;
+            border-left: 5px solid #ffc107;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        .images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
             margin: 1.5rem 0;
         }
-        .schedule-item {
-            margin-bottom: 1rem;
+        .images img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-        .illustration {
-            text-align: center;
-            margin: 1rem 0;
+        .images img:hover {
+            transform: scale(1.05);
         }
-        .illustration img {
-            max-width: 100%;
-            border-radius: 8px;
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        ul {
+            padding-left: 2rem;
+        }
+        ul li {
+            margin: 0.5rem 0;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
         footer {
             text-align: center;
-            padding: 1rem 0;
-            background-color: #f1f1f1;
+            color: white;
+            padding: 2rem 0;
             margin-top: 2rem;
         }
-        .highlight {
-            background-color: #fff3cd;
-            padding: 0.5rem;
-            border-radius: 5px;
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            .tab-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            .content-area {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>中山醫大教師會健康促進聯誼活動</h1>
-        <h2>嘉義太平老街一日遊</h2>
-    </header>
     <div class="container">
-        <section>
-            <h3>活動資訊</h3>
-            <p><strong>活動名稱：</strong>嘉義太平老街一日遊</p>
-            <p><strong>主旨：</strong>健康樂活</p>
-            <p><strong>活動日期：</strong>114年1月14日（星期二）</p>
-        </section>
+        <header>
+            <h1>🏃‍♂️ 中山醫大教師會出遊活動 🌿</h1>
+            <p>健康促進 • 聯誼交流 • 美好回憶</p>
+        </header>
 
-        <section class="illustration">
-            <img src="01.jpg" alt="活動map">
-        </section>
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('trip3')">
+                🚴 二水自行車道一日遊 <span style="font-size:0.8rem;background:#ff4444;padding:2px 8px;border-radius:10px;margin-left:5px;">最新</span>
+            </button>
+            <button class="tab-btn" onclick="switchTab('trip1')">
+                🌉 嘉義太平老街一日遊
+            </button>
+            <button class="tab-btn" onclick="switchTab('trip2')">
+                🚂 竹南-崎頂一日遊
+            </button>
+        </div>
 
-        <section class="schedule">
-            <h3>行程安排</h3>
-            <div class="schedule-item">
-                <strong>9:00</strong> 離開中山醫後門，前往太平雲梯停車場（約90分鐘）
+        <!-- 二水自行車道一日遊 -->
+        <div id="trip3" class="content-area active">
+            <div class="section">
+                <h2>🚴 二水自行車道一日遊</h2>
+                <p><strong>活動名稱:</strong> 二水自行車道一日遊</p>
+                <p><strong>活動主題:</strong> 健康樂活</p>
+                <p><strong>活動日期:</strong> 115年1月13日(星期二)</p>
+                <div style="background:#ffebee;padding:1rem;border-radius:8px;margin-top:1rem;border-left:4px solid #ff4444;">
+                    <p style="color:#c62828;font-weight:bold;margin:0;">⏰ 報名截止日: 115年1月7日</p>
+                </div>
             </div>
-            <div class="schedule-item">
-                <strong>10:30</strong> 太平雲梯遊客服務中心集合，現場購票或購買套票
-            </div>
-            <div class="schedule-item">
-                <strong>10:30-12:00</strong> 太平雲梯、雲之南步道
-            </div>
-            <div class="schedule-item">
-                <strong>12:00-13:30</strong> 太平老街自行用餐
-            </div>
-            <div class="schedule-item">
-                <strong>14:00-16:00</strong> 富摩咖啡莊園，咖啡DIY
-            </div>
-            <div class="schedule-item">
-                <strong>16:00</strong> 賦歸（可選擇參加碧湖山觀光茶園）
-            </div>
-        </section>
 
-        <section class="illustration">
-            <img src="02.jpg" alt="活動風景插圖">
-        </section>
+            <div class="section">
+                <h2>🗓 行程安排</h2>
+                <div class="timeline">
+                    <p><strong>09:03~10:00</strong> 大慶火車站搭區間車</p>
+                    <p><strong>10:00~10:30</strong> 集合、繳費、團體照(火車陳列場)</p>
+                    <p><strong>10:30</strong> 二水自行車行集合<br>
+                    <span style="font-size:0.9rem;color:#666;">📍 地址: 彰化縣二水鄉光化村光文路六號<br>📞 電話: 04-879 0207</span></p>
+                    <p><strong>10:30~16:30</strong> 單車自由行</p>
+                    <p><strong>16:30</strong> 歸還自行車、解散</p>
+                </div>
+            </div>
 
-        <section>
-            <h3>費用與交通</h3>
-            <p class="highlight">教師會會員每人補助100元</p>
-            <ul>
-                <li>自行前往：250元/人</li>
-                <li>共乘搭車：500元/人</li>
-                <li>眷屬：350元/人；共乘600元/人</li>
-            </ul>
-            <p><strong>報名截止日：</strong>114年1月3日中午12點</p>
-        </section>
+            <div class="section">
+                <h2>🎯 推薦景點與美食</h2>
+                <div style="background:#e8f5e9;padding:1.5rem;border-radius:8px;margin:1rem 0;">
+                    <h3 style="color:#2e7d32;margin-bottom:1rem;">🍴 站前美食</h3>
+                    <p>水煎包、麵線、烤玉米、燒餅、雞肉飯等</p>
+                    
+                    <h3 style="color:#2e7d32;margin:1.5rem 0 1rem 0;">🏞 必遊景點</h3>
+                    <ul style="padding-left:1.5rem;">
+                        <li>源泉車站</li>
+                        <li>八堡圳</li>
+                        <li>林先生廟</li>
+                        <li>二水老街</li>
+                        <li>謝東閔故居</li>
+                        <li>董家三代肉圓</li>
+                        <li>在地冰店、炒麵等特色小吃</li>
+                    </ul>
+                </div>
+            </div>
 
-        <section>
-            <h3>聯絡方式</h3>
-            <p>主辦單位：中山醫大教師會健康促進推動小組</p>		
-            <p>協辦人：楊乃成、胡超群、沈祐成、陳健懿</p>
+            <div class="section">
+                <h2>💰 活動費用與補助</h2>
+                <div class="info-box">
+                    <p style="font-size:1.1rem;color:#f57c00;font-weight:bold;margin-bottom:1rem;">
+                        ✨ 教師會會員每人補助200元
+                    </p>
+                    <p><strong>會員:</strong> 保險費50元 + 自行車100元 + 早餐50元 - 補助200元 = <strong style="color:#4CAF50;font-size:1.2rem;">0元/人</strong></p>
+                    <p><strong>眷屬:</strong> 保險費50元 + 自行車100元 + 早餐50元 = <strong>200元/人</strong></p>
+                    <p style="margin-top:1rem;padding-top:1rem;border-top:1px dashed #ddd;">
+                        ⚠️ <strong>注意事項:</strong><br>
+                        • 搭區間車請攜帶悠遊卡或自行購票<br>
+                        • 自行車租借需攜帶證件
+                    </p>
+                </div>
+            </div>
 
-            <p>聯絡人：營養學系 楊乃成（0936810214）</p>
-			<p>備註：可攜眷；如有任何未盡事宜請多利用本會Line群組聯絡。</p>
-        </section>
-		
-		       <section class="signup">
-            <h3>立即報名</h3>
-            <a href="https://forms.gle/9dpiWfExaULz4SiU7" target="_blank">點擊這裡填寫報名表單</a>
-        </section>
+            <div class="section">
+                <h2>📝 報名資訊</h2>
+                <ul>
+                    <li><strong style="color:#d32f2f;">報名截止日:</strong> 115年1月7日</li>
+                    <li><strong>主辦單位:</strong> 中山醫大教師會健康促進推動小組</li>
+                    <li><strong>協辦人:</strong> 楊乃成、胡超群、沈祐成、陳健懿</li>
+                    <li><strong>聯絡人:</strong> 營養學系 楊乃成老師 📞 0936-810214</li>
+                    <li><strong>報名方式:</strong> 教師會Line群組聯絡</li>
+                    <li><strong>備註:</strong> 可攜眷參加</li>
+                </ul>
+            </div>
+
+            <div class="section" style="text-align: center;">
+                <p style="font-size: 1.3rem; color: #4CAF50; font-weight: bold;">
+                    🚴‍♂️ 歡迎一起騎乘暢遊二水,享受健康樂活好時光! 🌿
+                </p>
+            </div>
+        </div>
+
+        <!-- 嘉義太平老街一日遊 -->
+        <div id="trip1" class="content-area">
+            <div class="section">
+                <h2>📸 嘉義太平老街一日遊</h2>
+                <p>
+                    114年1月14日(二),教師會舉辦了以健康樂活為主題的「嘉義太平老街一日遊」。在這次活動中,教師們享受了自然景觀與文化體驗,留下了滿滿的回憶!
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>🗓 行程安排</h2>
+                <div class="timeline">
+                    <p><strong>09:00</strong> 中山醫後門出發,前往太平雲梯停車場</p>
+                    <p><strong>10:30</strong> 太平雲梯遊客服務中心集合,購票後遊覽雲之南步道</p>
+                    <p><strong>12:00</strong> 自行用餐於太平老街</p>
+                    <p><strong>14:00</strong> 富摩咖啡莊園,咖啡DIY體驗</p>
+                    <p><strong>16:00</strong> 活動結束,返回出發地</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>✨ 活動亮點</h2>
+                <div class="images">
+                    <img src="01-0114.jpg" alt="太平雲梯合影">
+                    <img src="02-0114.jpg" alt="太平雲梯合影2">
+                    <img src="03-0114.jpg" alt="富摩咖啡莊園體驗">
+                    <img src="04-0114.jpg" alt="太平老街合影">
+                    <img src="05-0114.jpg" alt="雲之南步道合影">
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>💭 活動回顧</h2>
+                <p>
+                    這次嘉義太平老街一日遊,不僅讓教師們紓解壓力,也增進了同事之間的情誼。從壯觀的太平雲梯到充滿人文氣息的老街,再到香氣四溢的咖啡莊園,每個景點都讓大家收穫滿滿。期待未來能舉辦更多這樣的活動,讓大家有更多機會交流與放鬆!
+                </p>
+            </div>
+        </div>
+
+        <!-- 竹南-崎頂一日遊 -->
+        <div id="trip2" class="content-area">
+            <div class="section">
+                <h2>🚂 竹南-崎頂一日遊</h2>
+                <p><strong>活動主題:</strong> 健康樂活 • 美食 • 健走 • 聯誼</p>
+                <p><strong>活動日期:</strong> 114年7月2日(星期三)</p>
+            </div>
+
+            <div class="section">
+                <h2>🗓 行程安排</h2>
+                <div class="timeline">
+                    <p><strong>08:20~09:53</strong> 大慶火車站搭區間車</p>
+                    <p><strong>10:00~11:30</strong> 竹南火車站美食自由行</p>
+                    <p><strong>11:45~11:58</strong> 搭區間車前往崎頂火車站</p>
+                    <p><strong>12:00</strong> 集合、團體照、繳費</p>
+                    <p><strong>12:00~13:30</strong> 子母隧道 & 景觀台</p>
+                    <p><strong>14:00~16:00</strong> 啤酒廠導覽</p>
+                    <p><strong>16:00</strong> 返回竹南火車站解散</p>
+                    <p><strong>意猶未盡:</strong> 16:00~18:00 綠光自行車道</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>💰 活動費用與補助</h2>
+                <div class="info-box">
+                    <p><strong>會員:</strong> 保險50元 + 啤酒廠導覽100元 - 補助100元 ➝ <strong>50元/人</strong></p>
+                    <p><strong>眷屬:</strong> 保險費50元 + 啤酒廠導覽100元 ➝ <strong>150元/人</strong></p>
+                    <p>⚠️ 搭區間車請攜帶悠遊卡或自行購票</p>
+                    <p>🚴 意猶未盡行程請自行借車(建議提前於崎頂火車站附近東勳輕旅單車環島電輔車租賃借車)</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 報名資訊</h2>
+                <ul>
+                    <li>報名截止日: <strong>6月20日(四)</strong></li>
+                    <li>聯絡人: 營養學系 楊乃成老師 📞 0936-810214</li>
+                    <li>報名方式: 教師會Line群組 或 <a href="https://reurl.cc/6KxoEy" target="_blank">線上報名</a></li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>🔗 參考連結</h2>
+                <ul>
+                    <li><a href="https://www.gomaji.com/blog/%E7%AB%B9%E5%8D%97%E7%81%AB%E8%BB%8A%E7%AB%99%E7%BE%8E%E9%A3%9F/" target="_blank">竹南火車站美食地圖</a></li>
+                    <li><a href="https://yanmeiantrip.com/qiding-station/" target="_blank">子母隧道介紹</a></li>
+                    <li><a href="https://fullfen.tw/ttl-zhunan/" target="_blank">竹南啤酒廠導覽</a></li>
+                    <li><a href="https://cxeltonlee.pixnet.net/blog/post/226899802" target="_blank">綠光海風自行車道</a></li>
+                </ul>
+            </div>
+
+            <div class="section" style="text-align: center;">
+                <p style="font-size: 1.3rem; color: #667eea; font-weight: bold;">
+                    🚆 一起出發迎向夏日輕旅行吧!
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 中山醫大教師會第12屆理監事</p>
+            <p>主辦單位: 中山醫大教師會健康促進推動小組</p>
+        </footer>
     </div>
-    <footer>
-        <p>&copy;中山醫大教師會第12屆理監事</p>
-    </footer>
+
+    <script>
+        function switchTab(tripId) {
+            // 隱藏所有內容區域
+            const contents = document.querySelectorAll('.content-area');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 移除所有按鈕的active狀態
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // 顯示選中的內容區域
+            document.getElementById(tripId).classList.add('active');
+            
+            // 為對應按鈕添加active狀態
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
