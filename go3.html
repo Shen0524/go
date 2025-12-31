@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>中山醫大教師會｜二水自行車道一日遊活動公告</title>
+  
+  <meta name="description" content="114學年度第1學期健康促進聯誼活動：二水自行車道一日遊。日期：115年1月13日(二)。健康樂活、老街美食，會員全額補助。" />
+  <meta property="og:title" content="二水自行車道一日遊｜中山醫大教師會" />
+  <meta property="og:description" content="日期：115年1月13日(二)。會員免費參加！含保險、單車、早餐。快來報名！" />
+  <meta property="og:type" content="activity" />
+
+  <style>
+    :root {
+      /* 色票系統：結合學術藍與自然綠 */
+      --bg: #f3f4f6;
+      --surface: #ffffff;
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --primary: #2563eb; /* 亮藍 */
+      --primary-dark: #1e40af;
+      --accent: #10b981; /* 翠綠 */
+      --accent-light: #d1fae5;
+      --accent-text: #065f46;
+      --border: #e5e7eb;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --radius: 12px;
+    }
+
+    /* 基礎設定 */
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    a { color: var(--primary); text-decoration: none; transition: 0.2s; }
+    a:hover { color: var(--primary-dark); text-decoration: underline; }
+
+    /* 版面容器 */
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* 頁首 Header */
+    header {
+      background: linear-gradient(120deg, #eff6ff 0%, #ffffff 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 6px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .eyebrow {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      display: inline-block;
+      background: #dbeafe;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+    h1 {
+      margin: 10px 0;
+      font-size: clamp(24px, 5vw, 32px); /* 響應式字體 */
+      color: var(--text-main);
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    
+    /* 資訊小標籤 Grid */
+    .meta-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .meta-item {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    /* 主內容佈局 */
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 850px) {
+      .layout { grid-template-columns: 2fr 1.2fr; }
+    }
+
+    /* 通用卡片樣式 */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid white;
+    }
+    .card h2 {
+      font-size: 20px;
+      margin: 0 0 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f0f2f5;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 行程表 Table */
+    .table-container {
+      overflow-x: auto; /* 手機版可橫滑 */
+      -webkit-overflow-scrolling: touch;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px; /* 強制最小寬度以免手機版擠壓 */
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: #f9fafb;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    tr:last-child td { border-bottom: none; }
+    td { font-size: 15px; vertical-align: top; }
+    .time-col { font-family: monospace, sans-serif; color: var(--primary); font-weight: 600; }
+
+    /* 標籤 Badges */
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tag {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #f3f4f6;
+      color: var(--text-muted);
+      border: 1px solid #e5e7eb;
+    }
+    .tag.food { background: #fff7ed; color: #c2410c; border-color: #ffedd5; }
+    .tag.spot { background: #ecfdf5; color: #047857; border-color: #d1fae5; }
+
+    /* 費用比較區塊 */
+    .cost-box {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .cost-row:last-child { border: none; margin: 0; padding: 0; }
+    .cost-label { font-weight: 600; color: var(--text-main); }
+    .cost-value { font-weight: 700; font-size: 18px; }
+    .free { color: #e11d48; font-size: 24px; } /* 0元特別色 */
+    
+    .calculation {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* 重點提示 */
+    .alert {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
+      color: #92400e;
+      font-size: 14px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+
+    /* 聯絡資訊列表 */
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .contact-list li {
+      margin-bottom: 10px;
+      display: flex;
+      font-size: 15px;
+    }
+    .contact-label {
+      color: var(--text-muted);
+      min-width: 80px;
+    }
+
+    /* 按鈕區 CTA */
+    .cta-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: 1px solid var(--primary-dark);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+      text-decoration: none;
+    }
+    .btn-secondary {
+      background: #06c755; /* LINE Green */
+      color: white;
+      border: 1px solid #05b54d;
+    }
+    .btn-secondary:hover {
+      background: #05b54d;
+      box-shadow: 0 4px 8px rgba(6, 199, 85, 0.3);
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    /* 手機版調整 */
+    @media (max-width: 600px) {
+      .cta-group { grid-template-columns: 1fr; } /* 按鈕變垂直排列 */
+      .meta-grid { flex-direction: column; align-items: stretch; }
+      .meta-item { justify-content: center; }
+      header { padding: 24px 16px; }
+    }
+
+    /* 列印樣式優化 */
+    @media print {
+      body { background: white; font-size: 12pt; }
+      .wrap { padding: 0; max-width: 100%; }
+      header, .card, .meta-item { box-shadow: none; border: 1px solid #ccc; }
+      .cta-group, footer { display: none; } /* 列印時隱藏按鈕 */
+      a { text-decoration: none; color: black; }
+      header { background: none; }
+      header::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <header>
+      <span class="eyebrow">中山醫學大學教師會｜114學年度第1學期</span>
+      <h1>二水自行車道一日遊</h1>
+      <div class="subtitle">健康樂活 🚴 騎乘同樂 🌳 老街美食</div>
+      
+      <div class="meta-grid">
+        <div class="meta-item">📅 115年1月13日 (星期二)</div>
+        <div class="meta-item">📍 彰化縣二水鄉</div>
+        <div class="meta-item">💰 會員補助 $200 元</div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <section class="card">
+        <h2>⏱️ 行程安排</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 110px;">時間</th>
+                <th>活動內容</th>
+                <th style="width: 180px;">備註 / 地點</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="time-col">09:03-10:00</td>
+                <td><strong>區間車前往二水</strong><br><span style="font-size:13px; color:#666">大慶火車站出發</span></td>
+                <td>請攜帶悠遊卡<br>或自行購票</td>
+              </tr>
+              <tr>
+                <td class="time-col">10:00-10:30</td>
+                <td>集合、繳費、團體照</td>
+                <td>二水火車陳列場</td>
+              </tr>
+              <tr>
+                <td class="time-col">10:30</td>
+                <td><strong>租借自行車</strong><br><span style="font-size:13px; color:#666">二水自行車行 (需證件)</span></td>
+                <td>光文路六號<br><a href="tel:048790207">04-879 0207</a></td>
+              </tr>
+              <tr>
+                <td class="time-col">10:30 起</td>
+                <td>
+                  <strong>單車自由行 & 美食探索</strong>
+                  <div class="tags">
+                    <span class="tag spot">源泉車站</span>
+                    <span class="tag spot">八堡圳公園</span>
+                    <span class="tag spot">林先生廟</span>
+                    <span class="tag food">站前水煎包</span>
+                    <span class="tag food">謝東閔故居</span>
+                    <span class="tag food">董家肉圓</span>
+                  </div>
+                </td>
+                <td>自由騎乘<br>注意安全 ⚠️</td>
+              </tr>
+              <tr>
+                <td class="time-col">16:30</td>
+                <td>歸還自行車、賦歸</td>
+                <td>二水自行車行</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:14px; color:#666; margin-top:12px; text-align:center;">
+          💡 小叮嚀：請依自身體力調整騎乘速度，並適時補充水分。
+        </p>
+      </section>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        
+        <section class="card">
+          <h2>💵 費用試算</h2>
+          
+          <div class="cost-box" style="border: 1px solid #bfdbfe; background:#eff6ff;">
+            <div class="cost-row">
+              <span class="cost-label" style="color:#1e40af">教師會會員</span>
+              <span class="cost-value free">0 元</span>
+            </div>
+            <span class="calculation">
+              原價$200 (含保險50+單車100+早餐50) <br>
+              <strong>− 補助$200</strong> ＝ 免費
+            </span>
+          </div>
+
+          <div class="cost-box">
+            <div class="cost-row">
+              <span class="cost-label">眷屬 / 非會員</span>
+              <span class="cost-value">$200 元</span>
+            </div>
+            <span class="calculation">
+              費用含：保險$50 + 自行車$100 + 早餐$50
+            </span>
+          </div>
+
+          <ul style="padding-left: 20px; font-size: 14px; color: #4b5563; margin-bottom:0;">
+            <li>交通費：請自備悠遊卡搭乘區間車。</li>
+            <li>午餐：老街美食自理。</li>
+          </ul>
+
+          <div class="alert">
+            ⏰ 報名截止：<strong>115年1月7日 (三)</strong>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>📞 主辦單位</h2>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">主辦：</span>
+              <span>中山醫大教師會 健康促進推動小組</span>
+            </li>
+            <li>
+              <span class="contact-label">協辦：</span>
+              <span>楊乃成、胡超群、沈祐成、陳健懿</span>
+            </li>
+            <li style="margin-top:12px; border-top:1px dashed #eee; padding-top:12px;">
+              <span class="contact-label">聯絡人：</span>
+              <span>營養學系 楊乃成<br>
+                <a href="tel:0936810214" style="font-weight:bold;">0936-810-214</a>
+              </span>
+            </li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+
+    <div class="cta-group">
+      <a href="https://reurl.cc/6bkXX6" class="btn btn-primary" target="_blank">📝 立即填寫報名表</a>
+      <a href="https://reurl.cc/1kp3rY" class="btn btn-secondary" target="_blank">💬 加入活動 Line 群組</a>
+    </div>
+
+    <footer>
+      © 中山醫學大學教師會｜健康促進聯誼活動
+    </footer>
+  </div>
+
+</body>
+</html>
