@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>科達製藥股份有限公司產品訂購單</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #222;
+  background: #f5f5f5;
+  padding: 20px 10px;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 28px 24px;
+  border: 1px solid #ddd;
+}
+/* ---- HEADER ---- */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #2d6a4f;
+  gap: 16px;
+}
+.page-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a3d2b;
+}
+.contact-box {
+  font-size: 12px;
+  color: #444;
+  text-align: right;
+  line-height: 1.9;
+}
+.deadline-badge {
+  display: inline-block;
+  background: #fff8e1;
+  border: 1px solid #f9a825;
+  color: #7a5000;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+
+/* ---- TABLE ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+th {
+  background: #2d6a4f;
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+tr:nth-child(even) td { background: #f9f9f9; }
+tr:hover td { background: #eef6f1; }
+td.product-name { text-align: left; }
+.sale-price { color: #c0392b; font-weight: 700; }
+input[type="number"] {
+  width: 62px;
+  padding: 4px 6px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 13px;
+  font-family: inherit;
+}
+input[type="number"]:focus {
+  outline: none;
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 2px rgba(45,106,79,.15);
+}
+.subtotal-cell { font-weight: 600; color: #1a3d2b; }
+
+/* ---- TOTAL SECTION ---- */
+.total-section {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  background: #f9fdf9;
+}
+.total-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  padding: 3px 0;
+  gap: 12px;
+}
+.total-row .label {
+  color: #555;
+  font-size: 13px;
+  min-width: 80px;
+  text-align: right;
+}
+.total-row .value {
+  min-width: 110px;
+  text-align: right;
+  font-weight: 600;
+  font-size: 14px;
+}
+.total-row.grand {
+  border-top: 2px solid #2d6a4f;
+  margin-top: 10px;
+  padding-top: 12px;
+}
+.total-row.grand .label { font-size: 15px; font-weight: 700; color: #222; }
+.total-row.grand .value { font-size: 22px; color: #c0392b; }
+.shipping-note {
+  text-align: right;
+  font-size: 12px;
+  color: #777;
+  margin-top: 6px;
+}
+
+/* ---- CUSTOMER FORM ---- */
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a3d2b;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+}
+.form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 160px;
+}
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+.form-group input, .form-group textarea {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.form-group input:focus, .form-group textarea:focus {
+  outline: none;
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 2px rgba(45,106,79,.12);
+}
+
+/* ---- PAYMENT INFO ---- */
+.payment-info {
+  background: #f4f4f4;
+  border-left: 3px solid #2d6a4f;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.9;
+}
+.payment-info strong { display: block; margin-bottom: 2px; font-size: 13px; }
+
+/* ---- SUBMIT ---- */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: #2d6a4f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 1px;
+  transition: background .2s;
+}
+.submit-btn:hover { background: #1e4d38; }
+.submit-btn:disabled { background: #999; cursor: not-allowed; }
+.error-msg {
+  color: #c0392b;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+/* ---- CONFIRMATION VIEW ---- */
+#confirm-view { display: none; }
+.confirm-header {
+  text-align: center;
+  padding: 20px 0 24px;
+  border-bottom: 2px solid #2d6a4f;
+  margin-bottom: 20px;
+}
+.confirm-header .check-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+.confirm-header h2 {
+  font-size: 22px;
+  color: #2d6a4f;
+  margin-bottom: 6px;
+}
+.confirm-header p { font-size: 14px; color: #555; }
+.confirm-table th { background: #555; }
+.confirm-tfoot td {
+  font-weight: 600;
+  background: #f5f5f5;
+}
+.confirm-tfoot .grand-total td {
+  font-size: 16px;
+  font-weight: 700;
+  color: #c0392b;
+  background: #fff8f8;
+}
+.action-btns {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+.print-btn {
+  flex: 1;
+  padding: 12px;
+  background: #2d6a4f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.new-order-btn {
+  flex: 1;
+  padding: 12px;
+  background: #fff;
+  color: #2d6a4f;
+  border: 2px solid #2d6a4f;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ---- PRINT ---- */
+@media print {
+  body { background: #fff; padding: 0; }
+  .container { border: none; padding: 10px; }
+  #form-view { display: none !important; }
+  #confirm-view { display: block !important; }
+  .action-btns { display: none; }
+  .confirm-header .check-icon { font-size: 28px; }
+  .confirm-header h2 { font-size: 16px; }
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 600px) {
+  .page-header { flex-direction: column; }
+  .contact-box { text-align: left; }
+  table { font-size: 12px; }
+  th, td { padding: 4px 5px; }
+  input[type="number"] { width: 50px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===================== FORM VIEW ===================== -->
+<div id="form-view">
+
+  <div class="page-header">
+    <div>
+      <h1>科達製藥股份有限公司<br>產品訂購單</h1>
+      <div class="deadline-badge">截止日期：2026 / 05 / 20</div>
+    </div>
+    <div class="contact-box">
+      聯絡窗口：行銷企劃部<br>
+      TEL: 03-4696105 #618<br>
+      FAX: 03-4691447<br>
+      marketing303@koda.com.tw
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:36px">項目</th>
+        <th style="text-align:left;min-width:180px">品名</th>
+        <th style="width:70px">建議售價</th>
+        <th style="width:72px">優惠價</th>
+        <th style="width:72px">數量</th>
+        <th style="width:80px">金額小計</th>
+      </tr>
+    </thead>
+    <tbody id="product-tbody"></tbody>
+  </table>
+
+  <div class="total-section">
+    <div class="total-row">
+      <span class="label">商品小計</span>
+      <span class="value" id="subtotal-display">NT$ 0</span>
+    </div>
+    <div class="total-row">
+      <span class="label">運費</span>
+      <span class="value" id="shipping-display">NT$ 0</span>
+    </div>
+    <div class="total-row grand">
+      <span class="label">本次總計</span>
+      <span class="value" id="total-display">NT$ 0</span>
+    </div>
+    <p class="shipping-note">滿 NT$1,500 免運費，未滿加收 NT$80 運費</p>
+  </div>
+
+  <div style="margin-bottom:20px">
+    <p class="section-title">訂購人資料</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="inp-name">姓名 <span style="color:#c0392b">*</span></label>
+        <input type="text" id="inp-name" placeholder="請輸入姓名">
+      </div>
+      <div class="form-group">
+        <label for="inp-phone">手機 <span style="color:#c0392b">*</span></label>
+        <input type="tel" id="inp-phone" placeholder="09xxxxxxxx">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="inp-address">收件地址(超過1,500元可單獨成單配送至指定地點，未滿1,500元則由教師會發放。)</label>
+        <input type="text" id="inp-address" placeholder="請輸入收件地址（選填）">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="inp-remarks">備註</label>
+        <input type="text" id="inp-remarks" placeholder="其他備註事項（選填）">
+      </div>
+    </div>
+  </div>
+
+  <div class="payment-info">
+    <strong>付款方式：匯款</strong>
+    銀行：台灣銀行　　分行：龍潭分行<br>
+    帳號：71499504300712　　戶名：科榮生技有限公司
+  </div>
+
+  <button class="submit-btn" id="submit-btn" onclick="submitOrder()">送出訂單</button>
+  <p class="error-msg" id="error-msg"></p>
+
+</div><!-- /form-view -->
+
+
+<!-- ===================== CONFIRM VIEW ===================== -->
+<div id="confirm-view">
+
+  <div class="confirm-header">
+    <div class="check-icon">✅</div>
+    <h2>訂單已送出！感謝您的訂購</h2>
+    <p id="confirm-subtitle"></p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align:left">品名</th>
+        <th style="width:72px">優惠價</th>
+        <th style="width:56px">數量</th>
+        <th style="width:80px">小計</th>
+      </tr>
+    </thead>
+    <tbody id="confirm-tbody"></tbody>
+    <tfoot id="confirm-tfoot" class="confirm-tfoot"></tfoot>
+  </table>
+
+  <div class="action-btns">
+    <button class="print-btn" onclick="window.print()">🖨️ 列印 / 截圖存檔</button>
+    <button class="new-order-btn" onclick="resetForm()">↩ 再次訂購</button>
+  </div>
+
+</div><!-- /confirm-view -->
+
+</div><!-- /container -->
+
+<script>
+// ============================================================
+// ⚠️  將下方 YOUR_GOOGLE_APPS_SCRIPT_URL_HERE
+//     換成你部署好的 Google Apps Script 網址
+// ============================================================
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDWRkc3XqQoZuLQeITvNCQVxPLLvurv8xmWdOei7enkCaPUP_-3Ibd3rQJIYso-Z9i7g/exec';
+
+// -------- 商品資料 --------
+const PRODUCTS = [
+  { id:1,  name:'清卉涼茶(單瓶入)',                    msrp:55,   price:39   },
+  { id:2,  name:'清卉涼茶(24瓶入)',                    msrp:1320, price:936  },
+  { id:3,  name:'舒樂爽喉球(70粒/罐)',                msrp:210,  price:130  },
+  { id:4,  name:'舒樂爽喉球(24罐/盒)',                msrp:5040, price:3120 },
+  { id:5,  name:'玫瑰神孅飲(18包/盒)',                msrp:450,  price:345  },
+  { id:6,  name:'紅棗脆片(60g/包)',                    msrp:130,  price:95   },
+  { id:7,  name:'一條根舒活按摩膏-清爽型(454g/瓶)',  msrp:980,  price:780  },
+  { id:8,  name:'一條根舒活按摩膏-清爽型(50g/條)',   msrp:168,  price:130  },
+  { id:9,  name:'蘆薈晶瑩凝膠(454g/瓶)',             msrp:800,  price:560  },
+  { id:10, name:'冬蟲夏草菌絲體(60粒/瓶)',           msrp:990,  price:690  },
+  { id:11, name:'靈芝精華膠囊(90粒/瓶)',              msrp:1760, price:1230 },
+  { id:12, name:'牛樟芝精華膠囊(60粒/瓶)',           msrp:1760, price:1230 },
+  { id:13, name:'特級紅麴膠囊(30粒/盒)',              msrp:550,  price:380  },
+  { id:14, name:'麻油猴菇四神湯即食包(530g/包)',     msrp:180,  price:128  },
+  { id:15, name:'麻油猴菇四神湯禮盒(530g*3包/盒)',  msrp:580,  price:410  },
+  { id:16, name:'桂圓銀耳露即食包(300g/包)',         msrp:110,  price:80   },
+  { id:17, name:'桂圓銀耳露禮盒(300g*5包/盒)',      msrp:580,  price:410  },
+  { id:18, name:'首烏草本洗髮精(500g/瓶)',           msrp:290,  price:215  },
+  { id:19, name:'上醫-元氣當歸黃耆(60g/包)',         msrp:149,  price:100  },
+  { id:20, name:'上醫-養生十全大補(40g/包)',         msrp:149,  price:100  },
+  { id:21, name:'上醫-活力肉骨茶(40g/包)',           msrp:149,  price:100  },
+  { id:22, name:'上醫-四神湯(100g/包)',               msrp:159,  price:105  },
+  { id:23, name:'枸杞王禮盒(200g*2盒)',               msrp:1000, price:700  },
+  { id:24, name:'上醫皇極燕窩禮盒(60g*6瓶/盒)',    msrp:3680, price:2380 },
+  { id:25, name:'高纖三麥蘋果粥(54g*5包/盒)',       msrp:360,  price:310  },
+  { id:26, name:'運化活力米粥禮盒(50g*10包/盒)',    msrp:700,  price:595  },
+  { id:27, name:'新惠立清Q10膠囊(60粒/盒)',          msrp:1800, price:1380 },
+  { id:28, name:'新愛識複方精華膠囊(60粒/盒)',      msrp:1200, price:1020 },
+  { id:29, name:'舒服眠 膠囊(90粒/盒)',               msrp:980,  price:830  },
+  { id:30, name:'舒服眠 膠囊(10粒/盒)',               msrp:150,  price:130  },
+  { id:31, name:'花旗蔘精元氣禮盒(10ml*40包/盒)',  msrp:1600, price:1360 },
+  { id:32, name:'甜河谷-十全大補燉包(25g*2包/袋)', msrp:140,  price:120  },
+  { id:33, name:'甜河谷-首烏靈芝燉包(25g*2包/袋)', msrp:140,  price:120  },
+  { id:34, name:'甜河谷-四物加味燉包(25g*2包/袋)', msrp:140,  price:120  },
+  { id:35, name:'甜河谷-肉骨茶燉包(25g*2包/袋)',   msrp:140,  price:120  },
+  { id:36, name:'甜河谷-當歸黃耆燉包(30g*2包/袋)', msrp:140,  price:120  },
+  { id:37, name:'銀耳(60g/包)',                        msrp:150,  price:130  },
+  { id:38, name:'蓮子(200g/包)',                       msrp:299,  price:265  },
+  { id:39, name:'薏苡仁(350g/包)',                    msrp:170,  price:145  },
+];
+
+// -------- 建立商品列 --------
+const tbody = document.getElementById('product-tbody');
+PRODUCTS.forEach(p => {
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    `<td>${p.id}</td>` +
+    `<td class="product-name">${p.name}</td>` +
+    `<td>${p.msrp.toLocaleString()}</td>` +
+    `<td class="sale-price">${p.price.toLocaleString()}</td>` +
+    `<td><input type="number" id="qty_${p.id}" min="0" value="" placeholder="0" oninput="calcTotal()" onclick="this.select()"></td>` +
+    `<td class="subtotal-cell" id="sub_${p.id}">—</td>`;
+  tbody.appendChild(tr);
+});
+
+// -------- 即時計算 --------
+function calcTotal() {
+  let subtotal = 0;
+  PRODUCTS.forEach(p => {
+    const qty = parseInt(document.getElementById(`qty_${p.id}`).value) || 0;
+    const sub = qty * p.price;
+    const cell = document.getElementById(`sub_${p.id}`);
+    cell.textContent = qty > 0 ? sub.toLocaleString() : '—';
+    subtotal += sub;
+  });
+
+  const hasItems = subtotal > 0;
+  const shipping = hasItems ? (subtotal >= 1500 ? 0 : 80) : 0;
+  const total = subtotal + shipping;
+
+  document.getElementById('subtotal-display').textContent = `NT$ ${subtotal.toLocaleString()}`;
+  if (!hasItems) {
+    document.getElementById('shipping-display').textContent = 'NT$ 0';
+  } else if (shipping === 0) {
+    document.getElementById('shipping-display').innerHTML = 'NT$ 0 <span style="font-size:12px;color:#2d6a4f;font-weight:400">（免運）</span>';
+  } else {
+    document.getElementById('shipping-display').textContent = 'NT$ 80';
+  }
+  document.getElementById('total-display').textContent = `NT$ ${total.toLocaleString()}`;
+}
+
+// -------- 送出訂單 --------
+function submitOrder() {
+  const name    = document.getElementById('inp-name').value.trim();
+  const phone   = document.getElementById('inp-phone').value.trim();
+  const address = document.getElementById('inp-address').value.trim();
+  const remarks = document.getElementById('inp-remarks').value.trim();
+  const errEl   = document.getElementById('error-msg');
+
+  if (!name)  { errEl.textContent = '⚠️ 請填寫姓名'; return; }
+  if (!phone) { errEl.textContent = '⚠️ 請填寫手機號碼'; return; }
+
+  const orderedItems = PRODUCTS.filter(p => (parseInt(document.getElementById(`qty_${p.id}`).value) || 0) > 0);
+  if (orderedItems.length === 0) { errEl.textContent = '⚠️ 請至少選購一項商品'; return; }
+  errEl.textContent = '';
+
+  let subtotal = 0;
+  const items = orderedItems.map(p => {
+    const qty = parseInt(document.getElementById(`qty_${p.id}`).value) || 0;
+    const sub = qty * p.price;
+    subtotal += sub;
+    return { id: p.id, name: p.name, price: p.price, qty, sub };
+  });
+  const shipping = subtotal >= 1500 ? 0 : 80;
+  const total    = subtotal + shipping;
+
+  // 所有商品數量（39欄，供 Google Sheets 統計用）
+  const allQtys = PRODUCTS.map(p => parseInt(document.getElementById(`qty_${p.id}`).value) || 0);
+
+  const payload = {
+    timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
+    name, phone, address, remarks,
+    qtys: allQtys,
+    subtotal, shipping, total
+  };
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '送出中，請稍候…';
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(() => {
+    showConfirmation({ name, phone, address, items, subtotal, shipping, total });
+  })
+  .catch(() => {
+    errEl.textContent = '⚠️ 網路錯誤，請確認連線後重試';
+    btn.disabled = false;
+    btn.textContent = '送出訂單';
+  });
+}
+
+// -------- 顯示確認頁 --------
+function showConfirmation({ name, phone, address, items, subtotal, shipping, total }) {
+  document.getElementById('form-view').style.display = 'none';
+  const cv = document.getElementById('confirm-view');
+  cv.style.display = 'block';
+
+  let subtitle = `訂購人：${name}　手機：${phone}`;
+  if (address) subtitle += `　地址：${address}`;
+  document.getElementById('confirm-subtitle').textContent = subtitle;
+
+  const ctbody = document.getElementById('confirm-tbody');
+  ctbody.innerHTML = '';
+  items.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      `<td style="text-align:left">${item.name}</td>` +
+      `<td>${item.price.toLocaleString()}</td>` +
+      `<td>${item.qty}</td>` +
+      `<td>${item.sub.toLocaleString()}</td>`;
+    ctbody.appendChild(tr);
+  });
+
+  const tfoot = document.getElementById('confirm-tfoot');
+  const shippingText = shipping === 0 ? '0（免運）' : '80';
+  tfoot.innerHTML =
+    `<tr><td colspan="3" style="text-align:right">商品小計</td><td>${subtotal.toLocaleString()}</td></tr>` +
+    `<tr><td colspan="3" style="text-align:right">運費</td><td>${shippingText}</td></tr>` +
+    `<tr class="grand-total">` +
+      `<td colspan="3" style="text-align:right;font-size:16px;font-weight:700">本次總計</td>` +
+      `<td style="font-size:18px;font-weight:700;color:#c0392b">NT$ ${total.toLocaleString()}</td>` +
+    `</tr>`;
+
+  window.scrollTo(0, 0);
+}
+
+// -------- 重填表單 --------
+function resetForm() {
+  PRODUCTS.forEach(p => {
+    document.getElementById(`qty_${p.id}`).value = '';
+    document.getElementById(`sub_${p.id}`).textContent = '—';
+  });
+  ['inp-name','inp-phone','inp-address','inp-remarks'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('subtotal-display').textContent = 'NT$ 0';
+  document.getElementById('shipping-display').textContent = 'NT$ 0';
+  document.getElementById('total-display').textContent = 'NT$ 0';
+  document.getElementById('error-msg').textContent = '';
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = false;
+  btn.textContent = '送出訂單';
+  document.getElementById('confirm-view').style.display = 'none';
+  document.getElementById('form-view').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
