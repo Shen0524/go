@@ -60,7 +60,7 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: px;
+  margin-bottom: 20px;
   font-size: 13px;
 }
 th, td {
@@ -302,8 +302,9 @@ input[type="number"]:focus {
 
   <div class="page-header">
     <div>
-      <h1>科達製藥股份有限公司<br>產品訂購單</h1>
-      <div class="deadline-badge">截止日期：2026 / 05 / 14</div>
+	  <h1>中山醫學大學教師會 福利購</h1>
+      <h3>科達製藥股份有限公司<br>產品訂購單</h3>
+      <div class="deadline-badge">截止日期：2026 / 05 / 20</div>
     </div>
     <div class="contact-box">
       聯絡窗口：行銷企劃部<br>
@@ -332,15 +333,10 @@ input[type="number"]:focus {
       <span class="label">商品小計</span>
       <span class="value" id="subtotal-display">NT$ 0</span>
     </div>
-    <div class="total-row">
-      <span class="label">運費</span>
-      <span class="value" id="shipping-display">NT$ 0</span>
-    </div>
     <div class="total-row grand">
       <span class="label">本次總計</span>
       <span class="value" id="total-display">NT$ 0</span>
     </div>
-    <p class="shipping-note">滿 NT$1,500 免運費，未滿加收 NT$80 運費</p>
   </div>
 
   <div style="margin-bottom:20px">
@@ -481,19 +477,8 @@ function calcTotal() {
     subtotal += sub;
   });
 
-  const hasItems = subtotal > 0;
-  const shipping = hasItems ? (subtotal >= 1500 ? 0 : 80) : 0;
-  const total = subtotal + shipping;
-
   document.getElementById('subtotal-display').textContent = `NT$ ${subtotal.toLocaleString()}`;
-  if (!hasItems) {
-    document.getElementById('shipping-display').textContent = 'NT$ 0';
-  } else if (shipping === 0) {
-    document.getElementById('shipping-display').innerHTML = 'NT$ 0 <span style="font-size:12px;color:#2d6a4f;font-weight:400">（免運）</span>';
-  } else {
-    document.getElementById('shipping-display').textContent = 'NT$ 80';
-  }
-  document.getElementById('total-display').textContent = `NT$ ${total.toLocaleString()}`;
+  document.getElementById('total-display').textContent = `NT$ ${subtotal.toLocaleString()}`;
 }
 
 // -------- 送出訂單 --------
@@ -518,8 +503,8 @@ function submitOrder() {
     subtotal += sub;
     return { id: p.id, name: p.name, price: p.price, qty, sub };
   });
-  const shipping = subtotal >= 1500 ? 0 : 80;
-  const total    = subtotal + shipping;
+  const shipping = 0;
+  const total    = subtotal;
 
   // 所有商品數量（39欄，供 Google Sheets 統計用）
   const allQtys = PRODUCTS.map(p => parseInt(document.getElementById(`qty_${p.id}`).value) || 0);
@@ -574,10 +559,7 @@ function showConfirmation({ name, phone, address, items, subtotal, shipping, tot
   });
 
   const tfoot = document.getElementById('confirm-tfoot');
-  const shippingText = shipping === 0 ? '0（免運）' : '80';
   tfoot.innerHTML =
-    `<tr><td colspan="3" style="text-align:right">商品小計</td><td>${subtotal.toLocaleString()}</td></tr>` +
-    `<tr><td colspan="3" style="text-align:right">運費</td><td>${shippingText}</td></tr>` +
     `<tr class="grand-total">` +
       `<td colspan="3" style="text-align:right;font-size:16px;font-weight:700">本次總計</td>` +
       `<td style="font-size:18px;font-weight:700;color:#c0392b">NT$ ${total.toLocaleString()}</td>` +
