@@ -279,18 +279,160 @@ input[type="number"]:focus {
   .container { border: none; padding: 10px; }
   #form-view { display: none !important; }
   #confirm-view { display: block !important; }
-  .action-btns { display: none; }
+  .action-btns, .sticky-bar { display: none !important; }
   .confirm-header .check-icon { font-size: 28px; }
   .confirm-header h2 { font-size: 16px; }
 }
 
-/* ---- MOBILE ---- */
-@media (max-width: 600px) {
-  .page-header { flex-direction: column; }
-  .contact-box { text-align: left; }
-  table { font-size: 12px; }
-  th, td { padding: 4px 5px; }
-  input[type="number"] { width: 50px; }
+/* ---- STICKY TOTAL BAR ---- */
+.sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #1a3d2b;
+  color: #fff;
+  padding: 11px 20px;
+  z-index: 300;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 -3px 12px rgba(0,0,0,.25);
+}
+.sticky-bar .sticky-label {
+  font-size: 12px;
+  opacity: .8;
+  font-weight: 400;
+}
+.sticky-bar .sticky-amount {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f9d71c;
+}
+
+/* ---- TABLE WRAPPER ---- */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+.table-wrapper table { margin-bottom: 0; }
+
+/* ---- TABLET (≤ 820px) ---- */
+@media (max-width: 820px) {
+  body { padding: 10px 8px 68px; }
+  .container { padding: 20px 16px; }
+  .sticky-bar { display: flex; }
+
+  /* 隱藏「建議售價」欄 */
+  #order-table th.col-msrp,
+  #order-table td.col-msrp { display: none; }
+
+  /* 更大觸控區域 */
+  th, td { padding: 8px 6px; }
+  input[type="number"] {
+    width: 72px;
+    font-size: 16px;
+    padding: 7px 4px;
+    border-radius: 6px;
+  }
+  .form-group input {
+    padding: 11px 12px;
+    font-size: 15px;
+    border-radius: 6px;
+  }
+  .submit-btn { padding: 16px; font-size: 17px; border-radius: 6px; }
+  .print-btn, .new-order-btn { padding: 14px; font-size: 15px; }
+}
+
+/* ---- MOBILE (≤ 520px) ---- */
+@media (max-width: 520px) {
+  body { padding: 0 0 68px; background: #f0f0f0; }
+  .container { padding: 14px 10px; border: none; border-radius: 0; }
+
+  /* Header */
+  .page-header { flex-direction: column; gap: 8px; }
+  .page-header h1 { font-size: 17px; }
+  .contact-box { text-align: left; font-size: 11px; line-height: 1.7; }
+  .deadline-badge { font-size: 11px; }
+
+  /* 卡片式商品列 */
+  .table-wrapper { overflow: visible; border-radius: 0; margin-bottom: 10px; }
+  #order-table { display: block; }
+  #order-table thead { display: none; }
+  #order-table tbody { display: flex; flex-direction: column; gap: 8px; }
+  #order-table tbody tr {
+    display: grid;
+    grid-template-columns: 20px 1fr auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    row-gap: 5px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  #order-table tbody tr:nth-child(even) { background: #f9fdf9; }
+  #order-table td { border: none; padding: 0; vertical-align: middle; }
+
+  /* 商品編號 */
+  #order-table td.col-num {
+    grid-row: 1; grid-column: 1;
+    font-size: 10px; color: #bbb;
+    align-self: center; line-height: 1;
+  }
+  /* 品名 */
+  #order-table td.product-name {
+    grid-row: 1; grid-column: 2 / -1;
+    font-weight: 700; font-size: 13.5px;
+    line-height: 1.45; align-self: center;
+    color: #1a1a1a;
+  }
+  /* 建議售價（隱藏）*/
+  #order-table td.col-msrp { display: none; }
+  /* 優惠價 */
+  #order-table td.col-price {
+    grid-row: 2; grid-column: 2;
+    color: #c0392b; font-weight: 700; font-size: 14px;
+    align-self: center;
+  }
+  #order-table td.col-price::before {
+    content: '優惠價 ';
+    font-size: 10px; color: #999; font-weight: 400;
+    display: block; line-height: 1.2;
+  }
+  /* 數量輸入 */
+  #order-table td.col-qty { grid-row: 2; grid-column: 3; align-self: center; }
+  input[type="number"] {
+    width: 66px; font-size: 17px;
+    padding: 7px 4px; border-radius: 8px;
+    border: 1.5px solid #bbb;
+  }
+  input[type="number"]:focus { border-color: #2d6a4f; }
+  /* 小計 */
+  #order-table td.subtotal-cell {
+    grid-row: 2; grid-column: 4;
+    text-align: right; font-size: 13px;
+    align-self: center; min-width: 0; color: #2d6a4f;
+  }
+  #order-table td.subtotal-cell::before {
+    content: '= ';
+    color: #bbb; font-weight: 400; font-size: 11px;
+  }
+
+  /* 總計區塊 */
+  .total-section { padding: 12px 14px; border-radius: 8px; }
+  .total-row.grand .value { font-size: 20px; }
+
+  /* 表單 */
+  .form-group input { padding: 12px 12px; font-size: 16px; border-radius: 8px; }
+  .submit-btn { padding: 16px; font-size: 16px; border-radius: 10px; }
+
+  /* 確認頁按鈕直排 */
+  .action-btns { flex-direction: column; gap: 10px; }
+  .print-btn, .new-order-btn { width: 100%; padding: 14px; border-radius: 8px; }
+  .confirm-header h2 { font-size: 18px; }
+  .confirm-header .check-icon { font-size: 36px; }
 }
 </style>
 </head>
@@ -314,12 +456,13 @@ input[type="number"]:focus {
     </div>
   </div>
 
-  <table>
+  <div class="table-wrapper">
+  <table id="order-table">
     <thead>
       <tr>
         <th style="width:36px">項目</th>
         <th style="text-align:left;min-width:180px">品名</th>
-        <th style="width:70px">建議售價</th>
+        <th class="col-msrp" style="width:70px">建議售價</th>
         <th style="width:72px">優惠價</th>
         <th style="width:72px">數量</th>
         <th style="width:80px">金額小計</th>
@@ -327,6 +470,7 @@ input[type="number"]:focus {
     </thead>
     <tbody id="product-tbody"></tbody>
   </table>
+  </div>
 
   <div class="total-section">
     <div class="total-row">
@@ -369,6 +513,12 @@ input[type="number"]:focus {
   <p class="error-msg" id="error-msg"></p>
 
 </div><!-- /form-view -->
+
+<!-- 底部即時總計浮動列（手機/平板） -->
+<div class="sticky-bar" id="sticky-bar">
+  <span class="sticky-label">本次總計</span>
+  <span class="sticky-amount" id="sticky-amount">NT$ 0</span>
+</div>
 
 
 <!-- ===================== CONFIRM VIEW ===================== -->
@@ -457,11 +607,11 @@ const tbody = document.getElementById('product-tbody');
 PRODUCTS.forEach(p => {
   const tr = document.createElement('tr');
   tr.innerHTML =
-    `<td>${p.id}</td>` +
+    `<td class="col-num">${p.id}</td>` +
     `<td class="product-name">${p.name}</td>` +
-    `<td>${p.msrp.toLocaleString()}</td>` +
-    `<td class="sale-price">${p.price.toLocaleString()}</td>` +
-    `<td><input type="number" id="qty_${p.id}" min="0" value="" placeholder="0" oninput="calcTotal()" onclick="this.select()"></td>` +
+    `<td class="col-msrp">${p.msrp.toLocaleString()}</td>` +
+    `<td class="col-price sale-price">${p.price.toLocaleString()}</td>` +
+    `<td class="col-qty"><input type="number" id="qty_${p.id}" min="0" value="" placeholder="0" oninput="calcTotal()" onclick="this.select()"></td>` +
     `<td class="subtotal-cell" id="sub_${p.id}">—</td>`;
   tbody.appendChild(tr);
 });
@@ -479,6 +629,9 @@ function calcTotal() {
 
   document.getElementById('subtotal-display').textContent = `NT$ ${subtotal.toLocaleString()}`;
   document.getElementById('total-display').textContent = `NT$ ${subtotal.toLocaleString()}`;
+  // 更新底部浮動列
+  const stickyEl = document.getElementById('sticky-amount');
+  if (stickyEl) stickyEl.textContent = `NT$ ${subtotal.toLocaleString()}`;
 }
 
 // -------- 送出訂單 --------
@@ -539,6 +692,8 @@ function submitOrder() {
 // -------- 顯示確認頁 --------
 function showConfirmation({ name, phone, address, items, subtotal, shipping, total }) {
   document.getElementById('form-view').style.display = 'none';
+  const sb = document.getElementById('sticky-bar');
+  if (sb) sb.style.display = 'none';
   const cv = document.getElementById('confirm-view');
   cv.style.display = 'block';
 
@@ -586,6 +741,8 @@ function resetForm() {
   btn.textContent = '送出訂單';
   document.getElementById('confirm-view').style.display = 'none';
   document.getElementById('form-view').style.display = 'block';
+  const sb2 = document.getElementById('sticky-bar');
+  if (sb2) sb2.style.display = '';
   window.scrollTo(0, 0);
 }
 </script>
